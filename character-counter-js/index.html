@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Caracter Counter</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Analiza en tiempo real la que estas escribiendo</h1>
+    </header>
+    <main>
+      <section>
+        <form>
+          <textarea
+            id="texto"
+            cols="50"
+            rows="6"
+            placeholder="Escribe lo que quieres analizar..."
+          ></textarea>
+        </form>
+      </section>
+      <section class="resultados">
+        <p>
+          Caracteres: <span id="caracteres">0</span> Palabras:<span
+            id="palabras"
+            >0</span
+          >
+          Caracteres sin espacio: <span id="sinEspacio">0</span> Restantes:
+          <span id="restantes">280</span>
+        </p>
+      </section>
+      <button id="btnLimpiar">Limpiar</button>
+    </main>
+    <script src="app.js"></script>
+  </body>
+</html>
