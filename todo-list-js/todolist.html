@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+            /* ===== Estilos base (ya hechos, no hace falta que los toques) ===== */
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: 'Segoe UI', system-ui, sans-serif;
+        background: #F1F2F2;
+        color: #20203A;
+        display: flex;
+        justify-content: center;
+        padding: 40px 16px;
+    }
+
+    .app {
+        background: #fff;
+        width: 100%;
+        max-width: 440px;
+        border-radius: 14px;
+        box-shadow: 0 10px 30px rgba(43, 41, 109, 0.12);
+        padding: 26px;
+    }
+
+    h1 {
+        color: #2B296D;
+        font-size: 22px;
+        margin: 0 0 4px;
+    }
+
+    .sub {
+        color: #6E6E80;
+        font-size: 13px;
+        margin: 0 0 20px;
+    }
+
+    .fila {
+        display: flex;
+        gap: 8px;
+        margin-bottom: 16px;
+    }
+
+    #nuevaTarea {
+        flex: 1;
+        padding: 10px 12px;
+        border: 1.5px solid #CFD0DA;
+        border-radius: 8px;
+        font-size: 15px;
+    }
+
+    #nuevaTarea:focus {
+        outline: none;
+        border-color: #0E6689;
+    }
+
+
+
+    #agregar {
+        background: #0E6689;
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        padding: 0 18px;
+        font-size: 15px;
+        font-weight: 600;
+        cursor: pointer;
+        height: 45px;
+        width: 90px;
+    }
+
+    #agregar:hover {
+        background: #0b4f68;
+    }
+
+    #lista {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        gap: 8px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    #lista li {
+        background: #F7F7FA;
+        border: 1px solid #E7E7EE;
+        border-radius: 8px;
+        padding: 11px 12px;
+        margin-bottom: 8px;
+        font-size: 15px;
+        flex: 1;
+        cursor: pointer;
+    }
+    .filaTarea{
+        display: flex;
+        gap: 8px;
+    }
+
+    /* Clase para tachar una tarea hecha. La activás desde el JS con classList */
+    #lista li.hecha {
+        text-decoration: line-through;
+        color: #9A9AAB;
+        background: #EFEFF3;
+    }
+
+        .contenedorContador{
+        display: flex;
+        font-weight: 600;
+        font-size: 14px;
+    }
+
+    #contador {
+        color: #2B296D;
+        font-weight: 600;
+        font-size: 14px;
+        padding-left: 2px;
+    }
+    .borrar{
+        background: #0E6689;
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        padding: 0 24px;
+        font-size: 15px;
+        font-weight: 600;
+        cursor: pointer;
+        height: 45px;
+        width: 90px;
+    }
+        .borrar:hover {
+        background: #0b4f68;
+    }
+    </style>
+    <title>To Do List</title>
+</head>
+
+<body>
+
+    <body>
+        <div class="app">
+            <h1>Mi Lista de Tareas</h1>
+            <p class="sub">TP Clase 13 · El DOM</p>
+            <div class="fila">
+                <input id="nuevaTarea" type="text" placeholder="Escribí una tarea..." />
+                <button id="agregar">Agregar</button>
+            </div>
+            <ul id="lista"></ul>
+            <div class="contenedorContador">
+                <h4>Tareas: </h4>
+                <h4 id="contador">0</h4>
+            </div>
+        </div>
+
+        <script> //CAJA DE VARIABLES
+            const input = document.querySelector("#nuevaTarea");
+            const boton = document.querySelector("#agregar");
+            const lista = document.querySelector("#lista");
+            const contador = document.querySelector("#contador");
+
+
+            boton.addEventListener('click', evento1);
+            input.addEventListener('keydown', evento2);
+
+            // 2) Una función que actualiza el texto del contador
+            function actualizarContador() {
+                const tareas = lista.querySelectorAll('li');
+                contador.textContent = tareas.length;
+            }
+
+            // 3) EVENTO: cuando se hace click en "Agregar", crear una tarea
+            function evento1() {
+                if (input.value.trim() === '') {
+                    return;
+                }
+                const filaTarea = document.createElement('div');
+                filaTarea.classList.add('filaTarea');
+                const nuevaTarea = document.createElement('li');
+                nuevaTarea.textContent = input.value.trim();
+                nuevaTarea.addEventListener('click', evento4);
+                function evento4() {
+                    nuevaTarea.classList.toggle('hecha');
+                }
+                const borrar = document.createElement('button');
+                borrar.classList.add('borrar');
+                borrar.textContent = 'Borrar';
+                borrar.addEventListener('click', function () {
+                    nuevaTarea.remove();
+                    borrar.remove();
+                });
+                lista.appendChild(filaTarea)
+                filaTarea.appendChild(nuevaTarea);
+                filaTarea.appendChild(borrar)
+
+                actualizarContador();
+                input.value = '';
+            };
+
+            function evento2() {
+
+                if (input.value.trim() === '') {
+                    return;
+                }
+                if (event.key === "Enter") {
+                    event.preventDefault();
+                    const filaTarea = document.createElement('div');
+                    filaTarea.classList.add('filaTarea');
+                    const nuevaTarea = document.createElement('li');
+                    nuevaTarea.textContent = input.value.trim();
+                    nuevaTarea.addEventListener('click', evento4);
+                    function evento4() {
+                        nuevaTarea.classList.toggle('hecha');
+                    }
+                    const borrar = document.createElement('button');
+                    borrar.classList.add('borrar');
+                    borrar.textContent = 'Borrar';
+                    borrar.addEventListener('click', function () {
+                        nuevaTarea.remove();
+                        borrar.remove();
+                    });
+                    lista.appendChild(filaTarea)
+                    filaTarea.appendChild(nuevaTarea);
+                    filaTarea.appendChild(borrar)
+                    actualizarContador();
+                    input.value = '';
+                }
+            };
+        </script>
+    </body>
+
+</html>
