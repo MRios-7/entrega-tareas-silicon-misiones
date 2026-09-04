@@ -9,15 +9,15 @@ const maxCaracteres = 280;
 
 texto.addEventListener("input", contarCaracteres);
 function contarCaracteres() {
-  contCaracteres.textContent = texto.value.length;
+  contCaracteres.textContent = texto.value.replace(/[\n\r]/g, "").length;
   contPalabras.textContent = texto.value
     .trim()
     .split(/\s+/)
     .filter(Boolean).length;
-  restantes.textContent = 280 - texto.value.length;
+  restantes.textContent = 280 - texto.value.replace(/[\n\r]/g, "").length;
   sinEspacio.textContent = texto.value.replace(/\s/g, "").length;
 
-  if (texto.value.length > maxCaracteres) {
+  if (texto.value.replace(/[\n\r]/g, "").length > maxCaracteres) {
     texto.classList.add("limiteSuperado");
     restantes.classList.add("restanteSuperado");
   } else {
