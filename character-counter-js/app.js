@@ -10,7 +10,10 @@ const maxCaracteres = 280;
 texto.addEventListener("input", contarCaracteres);
 function contarCaracteres() {
   contCaracteres.textContent = texto.value.length;
-  contPalabras.textContent = texto.value.split(" ").length;
+  contPalabras.textContent = texto.value
+    .trim()
+    .split(/\s+/)
+    .filter(Boolean).length;
   restantes.textContent = 280 - texto.value.length;
   sinEspacio.textContent = texto.value.replace(/\s/g, "").length;
 
