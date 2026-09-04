@@ -1,5 +1,6 @@
 // Variables
 const texto = document.querySelector("#texto");
+const alerta = document.getElementById("alerta");
 const contCaracteres = document.getElementById("caracteres");
 const contPalabras = document.getElementById("palabras");
 const sinEspacio = document.getElementById("sinEspacio");
@@ -20,18 +21,15 @@ function contarCaracteres() {
   if (texto.value.replace(/[\n\r]/g, "").length > maxCaracteres) {
     texto.classList.add("limiteSuperado");
     restantes.classList.add("restanteSuperado");
+    alerta.textContent = "Has superado el límite de caracteres.";
   } else {
     texto.classList.remove("limiteSuperado");
     restantes.classList.remove("restanteSuperado");
+    alerta.textContent = "";
   }
 }
 function limpiar() {
   texto.value = "";
-  contCaracteres.textContent = 0;
-  contPalabras.textContent = 0;
-  restantes.textContent = 280;
-  sinEspacio.textContent = 0;
-  texto.classList.remove("limiteSuperado");
-  restantes.classList.remove("restanteSuperado");
+  contarCaracteres();
 }
 btnLimpiar.addEventListener("click", limpiar);
