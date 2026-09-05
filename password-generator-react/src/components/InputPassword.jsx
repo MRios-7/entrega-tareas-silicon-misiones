@@ -10,7 +10,7 @@ function InputPassword() {
   const [conMinuscula, setConMinuscula] = useState(false);
   const [conNumeros, setConNumeros] = useState(false);
   const [conSimbolos, setConSimbolos] = useState(false);
-
+  const [error, setError] = useState("");
   const copiarPassword = () => {
     if (password && password !== "Selecciona una opción") {
       navigator.clipboard.writeText(password);
@@ -24,6 +24,7 @@ function InputPassword() {
       <button type="button" onClick={copiarPassword} className="btn-copy">
         Copiar
       </button>
+      <h5 value={error}>{error}</h5>
       <PasswordSlider longitud={longitud} setlongitud={setlongitud} />
       <Checkbox
         conMayusculas={conMayusculas}
@@ -48,6 +49,7 @@ function InputPassword() {
         setConNumeros={setConNumeros}
         conSimbolos={conSimbolos}
         setConSimbolos={setConSimbolos}
+        setError={setError}
       />
     </>
   );

@@ -7,6 +7,7 @@ const BtnGenerator = ({
   conSimbolos,
   longitud,
   setPassword,
+  setError,
 }) => {
   const generarPassword = () => {
     let permitidos = "";
@@ -15,17 +16,26 @@ const BtnGenerator = ({
     if (conNumeros) permitidos += "0123456789";
     if (conSimbolos) permitidos += "!@#$%^&*";
 
-    if (permitidos === "") {
-      setPassword("Selecciona una opción");
-      return;
+    if (longitud === 0) {
+      setError("Se necesita que la longitud sea mayor a 0");
     }
 
     let newPassword = "";
-    for (let i = 0; i < longitud; i++) {
-      let random = permitidos[Math.floor(Math.random() * permitidos.length)];
-      newPassword += random;
+    if (permitidos === "") {
+      setPassword("");
+      setError("Marque al menos una Casilla");
+    } else {
+      for (let i = 0; i < longitud; i++) {
+        let random = permitidos[Math.floor(Math.random() * permitidos.length)];
+        newPassword += random;
+      }
+      setPassword(newPassword);
     }
-    setPassword(newPassword);
+    if (permitidos === "" && longitud === 0) {
+      setError(
+        "Es necesario que la longitud sea mayor a 0 y tambien marque al menos una casilla",
+      );
+    }
   };
   return (
     <button type="button" onClick={generarPassword}>
