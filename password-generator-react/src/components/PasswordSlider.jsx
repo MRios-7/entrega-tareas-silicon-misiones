@@ -1,6 +1,3 @@
-import React, { useState } from "react";
-import "./CSS/PasswordSlider.css";
-
 export default function PasswordSlider({ longitud, setlongitud }) {
   const handleSliderChange = (event) => {
     setlongitud(Number(event.target.value));

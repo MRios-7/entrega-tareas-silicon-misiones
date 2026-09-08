@@ -1,5 +1,4 @@
 import React from "react";
-import "./CSS/Checkbox.css";
 
 const Checkbox = ({
   conMayusculas,
@@ -22,6 +21,7 @@ const Checkbox = ({
           />
           Incluir Mayúsculas
         </label>
+
         <label>
           <input
             onChange={(e) => setConMinuscula(e.target.checked)}

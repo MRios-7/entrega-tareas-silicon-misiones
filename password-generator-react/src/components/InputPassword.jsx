@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import PasswordSlider from "./PasswordSlider";
 import BtnGenerator from "./BtnGenerator";
 import Checkbox from "./Checkbox";
+import BarraFortaleza from "./BarraFortaleza";
 
 function InputPassword() {
   const [password, setPassword] = useState("");
@@ -11,20 +12,33 @@ function InputPassword() {
   const [conNumeros, setConNumeros] = useState(false);
   const [conSimbolos, setConSimbolos] = useState(false);
   const [error, setError] = useState("");
+  const [puntosFortaleza, setPuntosFortaleza] = useState(null);
+  const [copiado, setCopiado] = useState(false);
+  const copiarTimer = useRef(null);
+
   const copiarPassword = () => {
-    if (password && password !== "Selecciona una opción") {
-      navigator.clipboard.writeText(password);
-      alert("¡Contraseña copiada al portapapeles!");
-    }
+    if (!password || password === "Selecciona una opción") return;
+
+    navigator.clipboard.writeText(password).then(() => {
+      setCopiado(true);
+      clearTimeout(copiarTimer.current);
+      copiarTimer.current = setTimeout(() => setCopiado(false), 2000);
+    });
   };
 
   return (
     <>
-      <input readOnly type="text" placeholder="P4$5W0rD!" value={password} />
+      <div className="password-display">
+        <input readOnly type="text" placeholder="P4$5W0rD!" value={password} />
+        {copiado && <span className="copied-message">¡Copiado!</span>}
+      </div>
       <button type="button" onClick={copiarPassword} className="btn-copy">
         Copiar
       </button>
-      <h5 value={error}>{error}</h5>
+
+      <h5 id="error" value={error}>
+        {error}
+      </h5>
       <PasswordSlider longitud={longitud} setlongitud={setlongitud} />
       <Checkbox
         conMayusculas={conMayusculas}
@@ -36,6 +50,7 @@ function InputPassword() {
         conSimbolos={conSimbolos}
         setConSimbolos={setConSimbolos}
       />
+      <BarraFortaleza puntos={puntosFortaleza} />
       <BtnGenerator
         password={password}
         setPassword={setPassword}
@@ -50,6 +65,7 @@ function InputPassword() {
         conSimbolos={conSimbolos}
         setConSimbolos={setConSimbolos}
         setError={setError}
+        setPuntosFortaleza={setPuntosFortaleza}
       />
     </>
   );

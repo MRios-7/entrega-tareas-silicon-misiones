@@ -8,8 +8,18 @@ const BtnGenerator = ({
   longitud,
   setPassword,
   setError,
+  setPuntosFortaleza,
 }) => {
   const generarPassword = () => {
+    const puntosPorTipos = [
+      conMayusculas,
+      conMinuscula,
+      conNumeros,
+      conSimbolos,
+    ].filter(Boolean).length;
+    const puntos = puntosPorTipos + (longitud >= 12 ? 1 : 0);
+    setPuntosFortaleza(puntos);
+
     let permitidos = "";
     if (conMayusculas) permitidos += "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     if (conMinuscula) permitidos += "abcdefghijklmnopqrstuvwxyz";
@@ -35,6 +45,9 @@ const BtnGenerator = ({
       setError(
         "Es necesario que la longitud sea mayor a 0 y tambien marque al menos una casilla",
       );
+    }
+    if (permitidos !== "" && longitud > 0) {
+      setError("");
     }
   };
   return (
