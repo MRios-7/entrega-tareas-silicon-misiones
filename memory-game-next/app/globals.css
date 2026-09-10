@@ -1,16 +1,18 @@
 @import "tailwindcss";
 
 :root {
-  --background: #f4f7f6;
-  --foreground: #19323a;
-  --surface: #ffffff;
-  --surface-soft: #e8f1ef;
-  --primary: #176b67;
-  --primary-dark: #0f514f;
-  --accent: #e87861;
-  --accent-dark: #c85d4b;
-  --border: #d2e1de;
-  --shadow: 0 24px 60px rgba(25, 50, 58, 0.12);
+  --background: #f4ecd8;
+  --foreground: #17243d;
+  --surface: #17243d;
+  --surface-soft: #f6eebd;
+  --primary: #253c67;
+  --primary-dark: #111d37;
+  --accent: #dfff4f;
+  --accent-dark: #b8d92b;
+  --coral: #ff6b5e;
+  --sky: #8dd8ff;
+  --border: #17243d;
+  --shadow: 10px 10px 0 rgba(23, 36, 61, 0.16);
 }
 
 @theme inline {
@@ -30,7 +32,9 @@ body {
 }
 
 body {
-  background: var(--background);
+  background-color: var(--background);
+  background-image: radial-gradient(#d9cda9 1px, transparent 1px);
+  background-size: 18px 18px;
   color: var(--foreground);
   font-family: var(--font-geist-sans), Arial, sans-serif;
   margin: 0;
@@ -44,7 +48,7 @@ main {
   align-items: center;
   background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: 24px;
+  border-radius: 6px;
   box-shadow: var(--shadow);
   display: flex;
   flex-direction: column;
@@ -68,9 +72,9 @@ header {
 }
 
 h1 {
-  color: var(--foreground);
+  color: var(--surface-soft);
   font-size: clamp(2rem, 6vw, 3rem);
-  letter-spacing: -0.04em;
+  letter-spacing: 0;
   margin: 0;
 }
 
@@ -87,7 +91,7 @@ h1 {
 }
 
 .etiqueta {
-  color: var(--accent-dark);
+  color: var(--coral);
   font-size: 0.78rem;
   font-weight: 700;
   letter-spacing: 0.14em;
@@ -96,7 +100,7 @@ h1 {
 }
 
 .inicio-descripcion {
-  color: #587078;
+  color: #cad5e8;
   font-size: 1.05rem;
   line-height: 1.6;
   margin: 18px auto 32px;
@@ -105,8 +109,8 @@ h1 {
 
 .btn-principal,
 .btn-iniciar {
-  border: 0;
-  border-radius: 12px;
+  border: 2px solid var(--foreground);
+  border-radius: 4px;
   cursor: pointer;
   font-weight: 700;
   transition:
@@ -116,15 +120,16 @@ h1 {
 }
 
 .btn-principal {
-  background: var(--accent);
-  box-shadow: 0 10px 20px rgba(232, 120, 97, 0.25);
-  color: #ffffff;
+  background: var(--coral);
+  box-shadow: 4px 4px 0 var(--foreground);
+  color: var(--foreground);
   padding: 15px 28px;
 }
 
 .btn-iniciar {
-  background: var(--surface-soft);
-  color: var(--primary-dark);
+  background: var(--accent);
+  box-shadow: 3px 3px 0 var(--foreground);
+  color: var(--foreground);
   padding: 11px 16px;
 }
 
@@ -134,18 +139,18 @@ h1 {
 }
 
 .btn-principal:hover {
-  background: var(--accent-dark);
-  box-shadow: 0 14px 24px rgba(232, 120, 97, 0.3);
+  background: #ff8479;
+  box-shadow: 6px 6px 0 var(--foreground);
 }
 
 .btn-iniciar:hover {
-  background: #d4e6e1;
+  background: var(--accent-dark);
 }
 
 .btn-principal:focus-visible,
 .btn-iniciar:focus-visible,
 .ficha:focus-visible {
-  outline: 3px solid rgba(232, 120, 97, 0.45);
+  outline: 3px solid var(--coral);
   outline-offset: 3px;
 }
 
@@ -159,9 +164,9 @@ h1 {
 .ficha {
   align-items: center;
   background: var(--primary);
-  border: 0;
+  border: 3px solid var(--surface-soft);
   border-radius: 50%;
-  color: #ffffff;
+  color: var(--surface-soft);
   cursor: pointer;
   display: flex;
   font-size: 1.7rem;
@@ -176,14 +181,21 @@ h1 {
 }
 
 .ficha:hover:not(:disabled) {
-  background: var(--primary-dark);
-  box-shadow: 0 8px 16px rgba(23, 107, 103, 0.22);
+  background: var(--coral);
+  border-color: var(--foreground);
+  box-shadow: 4px 4px 0 var(--foreground);
   transform: translateY(-3px);
 }
 
 .ficha:disabled {
   cursor: default;
   opacity: 0.9;
+}
+
+.ficha:not(:empty) {
+  background: var(--sky);
+  border-color: var(--foreground);
+  color: var(--foreground);
 }
 
 footer {
@@ -201,8 +213,10 @@ footer {
 
 .footer-card {
   background: var(--surface-soft);
-  border-radius: 12px;
-  color: var(--primary-dark);
+  border: 2px solid var(--foreground);
+  border-radius: 4px;
+  box-shadow: 4px 4px 0 var(--foreground);
+  color: var(--foreground);
   flex: 1;
   padding: 14px 16px;
   text-align: center;
@@ -214,7 +228,7 @@ footer {
 }
 
 .pantalla-victoria p {
-  color: #587078;
+  color: #cad5e8;
   font-size: 1.1rem;
   margin: 12px 0;
 }
