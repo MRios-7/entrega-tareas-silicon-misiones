@@ -72,9 +72,10 @@ header {
 }
 
 h1 {
-  color: var(--foreground);
-  font-size: clamp(2rem, 6vw, 3rem);
-  letter-spacing: 0;
+  color: var(--surface-soft);
+  font-size: clamp(2.4rem, 6vw, 3.4rem);
+  letter-spacing: -0.04em;
+  line-height: 1.1;
   margin: 0;
 }
 
@@ -86,24 +87,31 @@ h1 {
 
 .inicio-contenido,
 .pantalla-victoria {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
   max-width: 440px;
   width: 100%;
 }
 
 .etiqueta {
   color: var(--coral);
-  font-size: 0.78rem;
+  font-size: 0.9rem;
   font-weight: 700;
   letter-spacing: 0.14em;
   margin: 0 0 14px;
   text-transform: uppercase;
 }
 
+.inicio-contenido h1 {
+  margin-bottom: 18px;
+}
+
 .inicio-descripcion {
   color: #cad5e8;
   font-size: 1.05rem;
   line-height: 1.6;
-  margin: 18px auto 32px;
+  margin: 0 auto 32px;
   max-width: 360px;
 }
 
@@ -123,6 +131,7 @@ h1 {
   background: var(--coral);
   box-shadow: 4px 4px 0 var(--foreground);
   color: var(--foreground);
+  font-size: 1.02rem;
   padding: 15px 28px;
 }
 
