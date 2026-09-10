@@ -45,7 +45,7 @@ function Home() {
 
     const [primeraFicha, segundaFicha] = fichasDadasVuelta;
     const sonIguales = primeraFicha.valor === segundaFicha.valor;
-    const tiempoDeEspera = sonIguales ? 0 : 1000;
+    const tiempoDeEspera = sonIguales ? 0 : 800;
 
     const temporizador = setTimeout(() => {
       if (sonIguales) {
